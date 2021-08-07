@@ -1,24 +1,21 @@
 import React from "react";
 
-import Navbar from "components/Navbar.js";
-import Footer from "components/Footer.js";
-
 export default function Landing() {
   return (
     <>
-      <Navbar transparent />
-      <main>
-        <div className="relative pt-16 pb-32 flex content-center items-center justify-center"
+
+      <main >
+        <div className="relative  pt-16 pb-32 flex content-center items-center justify-center"
             style={{
               minHeight: "75vh"
             }}>
           <div className="absolute top-0 w-full h-full bg-center bg-cover"
               style={{
-                backgroundImage: "url('https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80')"
+                backgroundImage: "url('https://images.unsplash.com/photo-1582139329536-e7284fece509?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8YmFua2luZ3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60')"
               }}>
             <span id="blackOverlay" className="w-full h-full absolute opacity-75 bg-black"></span>
           </div>
-          <div className="container relative mx-auto">
+          <div className="container  relative mx-auto">
               <div className="items-center flex flex-wrap">
                 <div className="w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
                   <div className="pr-12">
@@ -138,7 +135,7 @@ export default function Landing() {
                 <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-pink-600">
                   <img
                     alt="..."
-                    src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80"
+                    src="./assets/images/Searching.png"
                     className="w-full align-middle rounded-t-lg"
                   />
                   <blockquote className="relative p-8 mb-4">
@@ -263,7 +260,7 @@ export default function Landing() {
         </section>
 
 
-        <section className="pt-20 pb-48">
+        {/* <section className="pt-20 pb-48">
           <div className="container mx-auto px-4">
             <div className="flex flex-wrap justify-center text-center mb-24">
               <div className="w-full lg:w-6/12 px-4">
@@ -432,7 +429,7 @@ export default function Landing() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         <section className="pb-20 relative block bg-gray-900">
           <div
@@ -579,7 +576,7 @@ export default function Landing() {
           </div>
         </section>
       </main>
-      <Footer />
+    
     </>
   );
 }
