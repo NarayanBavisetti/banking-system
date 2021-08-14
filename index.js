@@ -15,6 +15,7 @@ mongoose.connect(process.env.MONGODB_URL,{
 // app.get("/",(req,res) => {
 //     res.send("hi bruh")
 // })
+app.use(express.json());
 const userRoute = require("./routes/userData")
 app.use(userRoute)
 app.listen(PORT,() => console.log(`PORT is running at ${PORT}`))

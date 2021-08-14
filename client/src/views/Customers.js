@@ -1,9 +1,81 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import Table from '@material-ui/core/Table';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import { Button } from "@material-ui/core";
+import axios from "axios";
+
+const StyledTableCell = withStyles((theme) => ({
+    head: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    body: {
+      fontSize: 14,
+    },
+  }))(TableCell);
+  
+  const StyledTableRow = withStyles((theme) => ({
+    root: {
+      '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.action.hover,
+      },
+    },
+  }))(TableRow);
+
+  const useStyles = makeStyles({
+    table: {
+      minWidth: 700,
+      margin: "100px 100px 200px 100px"
+    },
+  });
 
 export default function Customers() {
-    return (
-        <div>
-            
-        </div>
-    )
+
+    const classes = useStyles();
+  const [data, setData] = useState([]);
+  useEffect(async () => {
+    await axios.get("/customers").then((res) => {
+      setData(res.data);
+    });
+  }, []);
+  return (
+    <div>
+      <TableContainer component={Paper}>
+        <Table className={classes.table} aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell>Dessert (100g serving)</StyledTableCell>
+              <StyledTableCell align="right">Calories</StyledTableCell>
+              <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
+              <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
+              
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data.map((item) => {
+              return (
+                <StyledTableRow key={item.name}>
+                  <StyledTableCell component="th" scope="row">
+                    {item.name}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {item.name}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">{item.amount}</StyledTableCell>
+                  <StyledTableCell align="right"><Button variant="contained" color="primary">Transfer</Button></StyledTableCell>
+                  {/* <StyledTableCell align="right">{row.protein}</StyledTableCell> */}
+                </StyledTableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
+  );
 }
