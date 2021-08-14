@@ -12,8 +12,9 @@ mongoose.connect(process.env.MONGODB_URL,{
 }).then(() => console.log("DB connected"))
 .catch((e) => console.log(e))
 
-app.get("/",(req,res) => {
-    res.send("hi bruh")
-})
-
+// app.get("/",(req,res) => {
+//     res.send("hi bruh")
+// })
+const userRoute = require("./routes/userData")
+app.use(userRoute)
 app.listen(PORT,() => console.log(`PORT is running at ${PORT}`))

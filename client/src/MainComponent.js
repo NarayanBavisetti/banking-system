@@ -7,10 +7,13 @@ import Transactions from "./views/Transactions"
 import AddCustomer from "./views/AddCustomer"
 import Footer from './components/Footer'
 import Navbar from "./components/Navbar"
+import StepContext from './Context/StepContext'
+
 
 export default function Main() {
     return (
         <div>
+            <StepContext>
             <Router>
             <Navbar transparent />
             <Route exact path="/" component={Landing} />
@@ -20,6 +23,7 @@ export default function Main() {
                 <Route exact path="/add" component={AddCustomer} />
                <Footer />
             </Router>
+            </StepContext>
         </div>
     )
 }
