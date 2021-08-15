@@ -1,43 +1,44 @@
 import React, { useEffect, useState } from "react";
-import Table from '@material-ui/core/Table';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import Table from "@material-ui/core/Table";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
 import { Button } from "@material-ui/core";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const StyledTableCell = withStyles((theme) => ({
-    head: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
-    },
-    body: {
-      fontSize: 14,
-    },
-  }))(TableCell);
-  
-  const StyledTableRow = withStyles((theme) => ({
-    root: {
-      '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover,
-      },
-    },
-  }))(TableRow);
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
 
-  const useStyles = makeStyles({
-    table: {
-      minWidth: 700,
-      margin: "100px 100px 200px 100px"
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    "&:nth-of-type(odd)": {
+      backgroundColor: theme.palette.action.hover,
     },
-  });
+  },
+}))(TableRow);
+
+const useStyles = makeStyles({
+  table: {
+    minWidth: 50,
+   marginTop:"100px",
+   marginBottom:"200px"
+  },
+});
 
 export default function Customers() {
-
-    const classes = useStyles();
+  const classes = useStyles();
   const [data, setData] = useState([]);
   useEffect(async () => {
     await axios.get("/customers").then((res) => {
@@ -54,7 +55,6 @@ export default function Customers() {
               <StyledTableCell align="right">Calories</StyledTableCell>
               <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
               <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-              
             </TableRow>
           </TableHead>
           <TableBody>
@@ -64,11 +64,15 @@ export default function Customers() {
                   <StyledTableCell component="th" scope="row">
                     {item.name}
                   </StyledTableCell>
-                  <StyledTableCell align="right">
-                    {item.name}
-                  </StyledTableCell>
+                  <StyledTableCell align="right">{item.name}</StyledTableCell>
                   <StyledTableCell align="right">{item.amount}</StyledTableCell>
-                  <StyledTableCell align="right"><Button variant="contained" color="primary">Transfer</Button></StyledTableCell>
+                  <StyledTableCell align="right">
+                    <Link to={`/customers/${item._id}`}>
+                      <Button variant="contained" color="primary">
+                        Transfer
+                      </Button>
+                    </Link>
+                  </StyledTableCell>
                   {/* <StyledTableCell align="right">{row.protein}</StyledTableCell> */}
                 </StyledTableRow>
               );

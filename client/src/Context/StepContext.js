@@ -18,6 +18,8 @@ export default function StepContext(props) {
         setCurrentStep(1);
         history.push("/customers");
     }
+
+
     return (
        <multiStepContext.Provider value={{currentStep, setCurrentStep,userData , setUserData,finalData , setFinalData, submitData}}>
            {props.children}

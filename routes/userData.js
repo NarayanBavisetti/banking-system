@@ -18,7 +18,7 @@ router.get("/customers",async (req, res) => {
     try {
       const User = await user.find();
       res.send(User);
-      console.log(User)
+      // console.log(User)
     //   res.status(200).json(User.favourite);
       // console.log(User.favourite)
     } catch (e) {
@@ -26,5 +26,16 @@ router.get("/customers",async (req, res) => {
       res.status(500).json();
     }
   });
+
+  router.get("/customers/:id" , async (req,res) =>{
+    // const { id} = req.body;
+    console.log(req.params.id);
+    const data = await user.findById(req.params.id);
+    console.log(data);
+    if(data){
+      res.send(data);
+      console.log(data);
+    }
+  } )
 
 module.exports = router;
