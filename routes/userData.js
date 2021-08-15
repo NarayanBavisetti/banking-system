@@ -29,13 +29,23 @@ router.get("/customers",async (req, res) => {
 
   router.get("/customers/:id" , async (req,res) =>{
     // const { id} = req.body;
-    console.log(req.params.id);
+    // console.log(req.params.id);
     const data = await user.findById(req.params.id);
-    console.log(data);
+    // console.log(data);
     if(data){
       res.send(data);
-      console.log(data);
+      // console.log(data);
     }
   } )
+
+  router.post("/customer/money" ,async (req,res) => {
+    console.log(req.body)
+    // const {id , amount,id2 } = req.body;
+    // const data = await user.findById(id);
+    // const data2 = await user.findById(id2);
+    // data.update({amount:amount1})
+
+    // res.send("The amount is debited rupees from _ and creidet to rupess _ ")
+  }) 
 
 module.exports = router;

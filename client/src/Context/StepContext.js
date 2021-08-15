@@ -9,19 +9,24 @@ export default function StepContext(props) {
     const [currentStep , setCurrentStep] = useState(1);
     const [userData , setUserData] = useState([]);
     const [finalData , setFinalData] = useState([]);
+const [transferData , setTransferData] = useState([]);
 
-    function submitData(){
+  async  function submitData(){
         setFinalData(finalData => [...finalData,userData]);
         console.log(userData)
-        axios.post("/add",userData);
+     await   axios.post("/add",userData);
         setUserData('');
         setCurrentStep(1);
         history.push("/customers");
     }
 
+  async  function sendMoney() {
+     await   axios.post("/customer/money" , transferData);
+        history.push("/customers");
+    }
 
     return (
-       <multiStepContext.Provider value={{currentStep, setCurrentStep,userData , setUserData,finalData , setFinalData, submitData}}>
+       <multiStepContext.Provider value={{currentStep, setCurrentStep,userData , setUserData,finalData , setFinalData, submitData,transferData,setTransferData,sendMoney}}>
            {props.children}
        </multiStepContext.Provider>
     )
