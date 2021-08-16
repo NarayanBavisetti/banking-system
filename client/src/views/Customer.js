@@ -18,6 +18,7 @@ import {
   MenuItem,
   Select as MuiSelect,
   Button,
+  Select,
 } from "@material-ui/core";
 import "./Customer.css";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -26,7 +27,7 @@ import { multiStepContext } from "../Context/StepContext";
 export default function Customer() {
   const { id } = useParams();
   const [id2, setId2] = useState("");
-  const [amount, setAmount] = useState();
+  const [amount, setAmount] = useState('');
   const [data, setData] = useState("");
   const [user, setUser] = useState([]);
   // const { transferData ,setTransferData, sendMoney } = useContext(multiStepContext);
@@ -48,17 +49,19 @@ export default function Customer() {
     }
   };
 
-async  function sendMoney () {
-    await axios.post("/customer/money",transferData);
+  async function sendMoney() {
     console.log(transferData);
+    await axios.put("/customer/money", transferData);
     history.push("/customers");
   }
-// const {amount , person , amount2 , person2 } = transferData;
-const transferData = {
-  amount,
-  id,
-  id2
-}
+  // const {amount , person , amount2 , person2 } = transferData;
+  const count = Number(amount)
+  const transferData = {
+    
+    count,
+    id,
+    id2,
+  };
 
   return (
     <div>
@@ -84,27 +87,22 @@ const transferData = {
             </div>
             <div className="row">
               <FormControl>
-                <InputLabel>Label</InputLabel>
-                <MuiSelect
-                // onChange={(e) => setTransferData({ ...transferData, person2: e.target.value })}
-                // value={transferData["person2"]}
+                <InputLabel id="countrySelectLabel">Country</InputLabel>
+                <Select
+                  labelId="countrySelectLabel"
+                  id="countrySelect"
                   onChange={(e) => setId2(e.target.value)}
                   value={id2}
                 >
-                  {user.map((item) => {
-                    return (
-                      <>
-                        {data.name !== item.name ? (
-                          <>
-                            <MenuItem value={item._id}>{item.name}</MenuItem>
-                          </>
-                        ) : null}
-                      </>
-                    );
-                  })}
-                </MuiSelect>
+                  {user.map((code, index) =>
+                    data.name !== code.name ? (
+                      <MenuItem key={index} value={code._id}>
+                        {code.name}
+                      </MenuItem>
+                    ) : null
+                  )}
+                </Select>
               </FormControl>
-
               {/* <FormControl>
                 <InputLabel>Account-Type</InputLabel>
                 <MuiSelect
@@ -123,6 +121,7 @@ const transferData = {
                   id="standard-start-adornment"
                   // onChange={(e) => setTransferData({ ...transferData, amount2: e.target.value })}
                   // value={transferData["amount2"]}
+                  type="number"
                   value={amount}
                   onChange={(event) => setAmount(event.target.value)}
                   error={amount > data.amount}
