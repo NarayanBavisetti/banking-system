@@ -41,6 +41,6 @@
   },
   "optionalDependencies": {
     "typescript": "4.2.3"
-  },
-  "proxy":"http://localhost:5000/"
+  }
+
 }
