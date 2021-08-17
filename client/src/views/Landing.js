@@ -262,7 +262,7 @@ export default function Landing() {
             <div className="flex flex-wrap justify-center lg:-mt-64 -mt-48">
               <div className="w-full lg:w-6/12 px-4">
                 <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300">
-                  <YouTube videoId="3dHOsKFMPJ4" />
+                  <YouTube videoId="dGyTs8F01OU" />
                 </div>
               </div>
             </div>
