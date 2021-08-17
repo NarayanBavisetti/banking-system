@@ -27,7 +27,7 @@ import { multiStepContext } from "../Context/StepContext";
 export default function Customer() {
   const { id } = useParams();
   const [id2, setId2] = useState("");
-  const [amount, setAmount] = useState('');
+  const [amount, setAmount] = useState("");
   const [data, setData] = useState("");
   const [user, setUser] = useState([]);
   // const { transferData ,setTransferData, sendMoney } = useContext(multiStepContext);
@@ -51,13 +51,16 @@ export default function Customer() {
 
   async function sendMoney() {
     console.log(transferData);
+   
     await axios.put("/customer/money", transferData);
+    await axios.post("/transactions", transferData);
     history.push("/customers");
   }
-  // const {amount , person , amount2 , person2 } = transferData;
-  const count = Number(amount)
+
+  const count = Number(amount);
+
+
   const transferData = {
-    
     count,
     id,
     id2,
@@ -68,15 +71,19 @@ export default function Customer() {
       <div className="app">
         <div className="details">
           <div className="big-img">
-            <img src={data.DOB} alt={data.DOB} />
+            <img
+              src="../assets/images/sampleProfile.png"
+              style={{ width: "70%" }}
+              alt={data.DOB}
+            />
           </div>
           <div className="box">
             <div className="row">
               <h4>
                 {data.name}
                 <h6>
-                  <i class="fas fa-star" style={{ color: "yellow" }}></i>
-                  {data.amount}/10
+                  {/* <i class="fas fa-star" style={{ color: "yellow" }}></i> */}
+                  ₹{data.amount}
                 </h6>
               </h4>
 
@@ -87,7 +94,7 @@ export default function Customer() {
             </div>
             <div className="row">
               <FormControl>
-                <InputLabel id="countrySelectLabel">Country</InputLabel>
+                <InputLabel id="countrySelectLabel">Transfer to</InputLabel>
                 <Select
                   labelId="countrySelectLabel"
                   id="countrySelect"
@@ -103,42 +110,26 @@ export default function Customer() {
                   )}
                 </Select>
               </FormControl>
-              {/* <FormControl>
-                <InputLabel>Account-Type</InputLabel>
-                <MuiSelect
-                // onChange={(e) =>
-                //   setUserData({ ...userData, accountType: e.target.value })
-                // }
-                // value={userData["accountType"]}
-                >
-                  <MenuItem value="Current Account">Current Account</MenuItem>
-                  <MenuItem value="Savings Account">Savings Account</MenuItem>
-                </MuiSelect>
-              </FormControl> */}
-              <div>
-                <TextField
-                  label="Deposit Amount"
-                  id="standard-start-adornment"
-                  // onChange={(e) => setTransferData({ ...transferData, amount2: e.target.value })}
-                  // value={transferData["amount2"]}
-                  type="number"
-                  value={amount}
-                  onChange={(event) => setAmount(event.target.value)}
-                  error={amount > data.amount}
-                  helperText={
-                    (console.log(amount),
-                    console.log(data.amount),
-                    amount > data.amount
-                      ? "The amount is greater than your balance"
-                      : " ")
-                  }
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">₹</InputAdornment>
-                    ),
-                  }}
-                />
-              </div>
+              <TextField
+                label="Transfer Amount"
+                id="standard-start-adornment"
+                type="number"
+                value={amount}
+                onChange={(event) => setAmount(event.target.value)}
+                error={amount > data.amount}
+                helperText={
+                  (console.log(amount),
+                  console.log(data.amount),
+                  amount > data.amount
+                    ? "The amount is greater than your balance"
+                    : " ")
+                }
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">₹</InputAdornment>
+                  ),
+                }}
+              />
             </div>
             <div>
               {amount > data.amount ? (

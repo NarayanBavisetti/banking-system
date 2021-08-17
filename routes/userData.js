@@ -1,4 +1,5 @@
 const express = require("express");
+const transactions = require("../models/transactionSchema");
 const router = express.Router();
 const user = require("../models/userSchema");
 
@@ -90,5 +91,37 @@ router.put("/customer/money", async (req, res) => {
 
   // res.send("The amount is debited rupees from _ and creidet to rupess _ ")
 });
+
+
+router.post("/transactions" , async(req,res) => {
+  try {
+  const { id, count, id2 } = req.body;
+  const data = await user.findById(id);
+  const data2 = await user.findById(id2);
+// console.log(req.body);
+  const newTrans = new transactions({
+    userOne : data.name,
+    userTwo:data2.name,
+    amount:count
+  })
+
+  await newTrans.save();
+} catch (e) {
+  console.log(e);
+}
+})
+
+
+router.get("/gettransactions", async (req,res) => {
+  try {
+    const data = await transactions.find();
+    res.send(data);
+    // console.log(data)
+  } catch (e) {
+    console.log(e);
+    res.status(500).json();
+  }
+})
+
 
 module.exports = router;

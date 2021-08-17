@@ -32,8 +32,10 @@ const StyledTableRow = withStyles((theme) => ({
 const useStyles = makeStyles({
   table: {
     minWidth: 50,
-   marginTop:"100px",
-   marginBottom:"200px"
+  //  marginTop:"100px",
+  //  marginBottom:"200px",
+   margin:"100px auto 200px",
+   width:"70%"
   },
 });
 
@@ -51,20 +53,24 @@ export default function Customers() {
         <Table className={classes.table} aria-label="customized table">
           <TableHead>
             <TableRow>
-              <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-              <StyledTableCell align="right">Calories</StyledTableCell>
-              <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-              <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
+            <StyledTableCell>S No.</StyledTableCell>
+              <StyledTableCell>Name</StyledTableCell>
+              {/* <StyledTableCell align="right">Calories</StyledTableCell> */}
+              <StyledTableCell align="right">Amount</StyledTableCell>
+              <StyledTableCell align="right">Transfer</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((item) => {
+            {data.map((item,index) => {
               return (
                 <StyledTableRow key={item.name}>
                   <StyledTableCell component="th" scope="row">
+                    {index +1}
+                  </StyledTableCell>
+                  <StyledTableCell align="left" component="th" scope="row">
                     {item.name}
                   </StyledTableCell>
-                  <StyledTableCell align="right">{item.name}</StyledTableCell>
+                  {/* <StyledTableCell align="right">{item.name}</StyledTableCell> */}
                   <StyledTableCell align="right">{item.amount}</StyledTableCell>
                   <StyledTableCell align="right">
                     <Link to={`/customers/${item._id}`}>

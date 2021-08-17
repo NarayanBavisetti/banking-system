@@ -50,8 +50,9 @@ export default function First() {
             value={userData["firstName"]}
           />
 
-          <TextField
+          <TextField style={{outline:'none'}}
             label="Address"
+            // outline="none"
             color="secondary"
             onChange={(e) =>
               setUserData({ ...userData, Address: e.target.value })
